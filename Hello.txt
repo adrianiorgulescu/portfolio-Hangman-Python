@@ -1,0 +1,10 @@
+Hellow world! Welcome to The Hangman!
+
+The rules are simple:
+- select a category of words you'd like to play;
+- enter your choices;
+- only individual letters or one of the following characters are allowed: "'", "-" or empty space;
+- only one character is allowed per turn;
+- in order to win you must guess the word before the little man gets hanged.
+
+Good luck!
