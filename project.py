@@ -12,7 +12,7 @@ def main():
     fileDir = workingDir + '\hangman_ascii'
 
     #Print hello text and game rules on screen. Use a text file.
-    clear_terminal()
+    clear_terminal() #Clear the terminal initially
     try:
         with open("Hello.txt", "r") as file:
             hello = file.read()
@@ -105,7 +105,6 @@ def guess(word, hidden_word, fileDir):
 
         # Add code here to ensure that the guess is a single character a-z, ', -,  or space.
         if guess in characters:
-
             clear_terminal()
             if turn < 11:
                 draw_hangman(turn, fileDir)
@@ -125,7 +124,7 @@ def guess(word, hidden_word, fileDir):
         #check if win or lose.
         #if either of these, break. If false, continue with the loop
         if check_status(characters, h_word_characters, turn, word, fileDir):
-            break
+            break 
         else:
             continue
 
@@ -162,37 +161,42 @@ def render_hidden_word(word):
 def check_status(characters, h_word_characters, turn, word, fileDir):
     #use figlet for ascii art words and select font
     figlet = Figlet()
-    f = "ogre"
+    font = "ogre"
 
     #check if won and if true, print congrats on screen, return true
     if turn > 0 and characters == h_word_characters:
-        clear_terminal()
-        draw_hangman(turn, fileDir)
-        print(f"{''.join(h_word_characters)} out of {len(h_word_characters)} characters\n")
-        text = "Congrats!\nYou won!"
-        figlet.setFont(font=f)
-        print(figlet.renderText(text))
-        return True
+        print_won_on_screen(h_word_characters, turn, fileDir, figlet, font)
 
     #check if lost and if true, print lost on screen, return true
     elif turn == 0:
-        clear_terminal()
-        draw_hangman(turn, fileDir)
-        print(f"{''.join(h_word_characters)} out of {len(h_word_characters)} characters\n")
-        print(f"The word is: {word}\n")
-        text = "You lost!\nTry again!"
-        figlet.setFont(font=f)
-        print(figlet.renderText(text))
-        return True
+        print_lost_on_screen(h_word_characters, turn, word, fileDir, figlet, font)
 
     #if not lost or won return false
     else:
         return False
 
+def print_lost_on_screen(h_word_characters, turn, word, fileDir, figlet, font):
+    clear_terminal()
+    draw_hangman(turn, fileDir)
+    print(f"{''.join(h_word_characters)} out of {len(h_word_characters)} characters\n")
+    print(f"The word is: {word}\n")
+    text = "You lost!\nTry again!"
+    figlet.setFont(font=font)
+    print(figlet.renderText(text))
+    sys. exit()
+
+def print_won_on_screen(h_word_characters, turn, fileDir, figlet, font):
+    clear_terminal()
+    draw_hangman(turn, fileDir)
+    print(f"{''.join(h_word_characters)} out of {len(h_word_characters)} characters\n")
+    text = "Congrats!\nYou won!"
+    figlet.setFont(font=font)
+    print(figlet.renderText(text))
+    sys. exit()
+
 def clear_terminal():
     #a function to clear the terminal screen
     os.system('cls' if os.name == 'nt' else 'clear')
-
 
 if __name__ == "__main__":
     main()
