@@ -1,4 +1,4 @@
-from project import check_status, render_hidden_word, draw_hangman
+from helpers import check_status, render_hidden_word, draw_hangman
 
 def main():
     test_check_status_1()
